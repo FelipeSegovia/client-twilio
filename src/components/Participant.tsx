@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 
-export const Participant = ({ participant }: any) => {
+export const Participant = ({ participant, mute }: any) => {
   const [videoTracks, setVideoTracks] = useState<any[]>([])
   const [audioTracks, setAudioTracks] = useState<any[]>([])
 
@@ -66,7 +66,7 @@ export const Participant = ({ participant }: any) => {
     <div className="participant">
       <h3>{participant.identity}</h3>
       <video ref={videoRef} autoPlay={true} />
-      <audio ref={audioRef} autoPlay={true} />
+      <audio ref={audioRef} autoPlay={true} muted={mute} />
     </div>
   )
 }

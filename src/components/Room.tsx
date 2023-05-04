@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react'
 import { Participant } from './Participant'
 import { ImPhoneHangUp } from 'react-icons/im'
+import { FaMicrophone, FaMicrophoneSlash } from 'react-icons/fa'
 
 export const Room = ({ roomName, room, handleLogout }: any) => {
   const [participants, setParticipants] = useState<any[]>([])
+  const [mute, setMute] = useState(false)
 
   useEffect(() => {
     const participantConnected = (participant: any) => {
@@ -42,7 +44,28 @@ export const Room = ({ roomName, room, handleLogout }: any) => {
               key={room.localParticipant.sid}
               participant={room.localParticipant}
             />
-            <div>
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                backgroundColor: '#333e5a',
+              }}
+            >
+              <button
+                onClick={() => setMute(!mute)}
+                style={{
+                  backgroundColor: 'gray',
+                  borderRadius: 50,
+                  padding: '5px 15px',
+                  margin: '0 10px',
+                }}
+              >
+                {mute ? (
+                  <FaMicrophoneSlash size={24} />
+                ) : (
+                  <FaMicrophone size={24} />
+                )}
+              </button>
               <button
                 onClick={handleLogout}
                 style={{
@@ -51,7 +74,7 @@ export const Room = ({ roomName, room, handleLogout }: any) => {
                   padding: '5px 25px',
                 }}
               >
-                <ImPhoneHangUp size={36} />
+                <ImPhoneHangUp size={24} />
               </button>
             </div>
           </>
